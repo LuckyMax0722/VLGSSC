@@ -1,0 +1,7 @@
+setup.py
+VLGSSC.egg-info/PKG-INFO
+VLGSSC.egg-info/SOURCES.txt
+VLGSSC.egg-info/dependency_links.txt
+VLGSSC.egg-info/top_level.txt
+configs/__init__.py
+configs/config.py
