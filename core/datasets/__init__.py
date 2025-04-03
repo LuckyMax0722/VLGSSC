@@ -1,2 +1,2 @@
-from .semantic_kitti_blip2 import SemanticKITTIBlipDataset
-from .semantic_kitti_blip2_dm import SemanticKITTIBlipDataModule
+from .semantic_kitti_blip2 import SemanticKITTIBlipDataset, SemanticKITTIBlipDataModule
+from .semantic_kitti_blip2_text import SemanticKITTIBlipTextDataset, SemanticKITTIBlipTextDataModule

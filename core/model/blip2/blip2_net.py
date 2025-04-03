@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 
 from lavis.models import load_model_and_preprocess
-from configs.config import CONF
+from configs import CONF
 
 class Blip2Module(pl.LightningModule):
     def __init__(

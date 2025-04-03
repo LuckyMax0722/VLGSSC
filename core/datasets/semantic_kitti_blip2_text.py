@@ -8,7 +8,7 @@ import pytorch_lightning as pl
 from torch.utils.data.dataloader import DataLoader
 
 
-class SemanticKITTIBlipDataset(Dataset):
+class SemanticKITTIBlipTextDataset(Dataset):
     def __init__(
         self,
         data_root,
@@ -64,9 +64,21 @@ class SemanticKITTIBlipDataset(Dataset):
             img = info['img_2_path'],
         )
         
-    
+        # load text
+        input_dict['text'] = self.get_text_info(index, key='text_path')
+
         return input_dict
 
+    def get_text_info(self, index, key='text_path'):
+        info = self.data_infos[index][key]
+        
+        return self.load_text(info)
+
+    def load_text(self, text_filename):
+        with open(text_filename, 'r', encoding='utf-8') as f:
+            sentence = f.read()
+        
+        return sentence
 
     def load_annotations(self, ann_file=None):
         scans = []
@@ -76,23 +88,29 @@ class SemanticKITTIBlipDataset(Dataset):
 
             id_base_path = os.path.join(self.data_root, "sequences", sequence, 'voxels', '*.bin')
 
+            text_base_path = os.path.join(self.data_root, "text", 'Blip2', sequence)
+
             for id_path in glob.glob(id_base_path):
                 img_id = id_path.split("/")[-1].split(".")[0]
 
                 # image
                 img_2_path = os.path.join(img_base_path, 'image_2', img_id + '.png')
                 
+                # text
+                text_path = os.path.join(text_base_path, img_id + '.txt')
+
                 scans.append(
                     {   
                         "sequence": sequence,
                         "frame_id": img_id,
                         "img_2_path": img_2_path,
+                        "text_path": text_path
                     })
                 
         return scans  # return to self.data_infos
 
 
-class SemanticKITTIBlipDataModule(pl.LightningDataModule):
+class SemanticKITTIBlipTextDataModule(pl.LightningDataModule):
     def __init__(
         self,
         data_root,
@@ -100,12 +118,13 @@ class SemanticKITTIBlipDataModule(pl.LightningDataModule):
         num_workers=4,
     ):
         super().__init__()
+
         self.data_root = data_root
         self.batch_size = batch_size
         self.num_workers = num_workers
     
     def setup(self, stage=None):
-        self.predict_dataset = SemanticKITTIBlipDataset(self.data_root, 'predict')
+        self.predict_dataset = SemanticKITTIBlipTextDataset(self.data_root, 'predict')
     
     def predict_dataloader(self):
         return DataLoader(
@@ -118,13 +137,14 @@ class SemanticKITTIBlipDataModule(pl.LightningDataModule):
 
 
 if __name__ == '__main__':
-    s = SemanticKITTIBlipDataset(
+    s = SemanticKITTIBlipTextDataset(
         data_root='/u/home/caoh/datasets/SemanticKITTI/dataset',
         split='predict',
     )
 
-    print(s[0])
+    print(s[0]['img'])
+    print(s[0]['text'])
     #print(s[0]['gt_occ'])
     #print(s[0]['gt_occ_2'])
 
-    # python /u/home/caoh/projects/MA_Jiachen/3DPNA/projects/datasets/semantic_kitti_blip2.py
+    # python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/datasets/semantic_kitti_blip2_text.py
