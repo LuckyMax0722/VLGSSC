@@ -2,6 +2,9 @@
 
 This repository is an extension of [3DSSC](https://github.com/LuckyMax0722/3DPNA). For detailed information, please refer to the main repository. Currently, this repository supports both **LAVIS**: A Library for Language-Vision Intelligence and **LLaVA**: Large Language and Vision Assistant.
 
+## 0. Demo
+![Demo of LAVIS and LLaVA](demo/demo_1.png)
+
 ## 1. Installation
 
 ### 1.1 Foundation Model Installation
