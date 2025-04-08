@@ -32,4 +32,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-    # CUDA_VISIBLE_DEVICES=5 python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/pl_tools/pl_blip_predict.py
+    # python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/pl_tools/pl_blip_predict.py
