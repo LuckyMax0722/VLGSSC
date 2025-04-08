@@ -67,7 +67,7 @@ class Blip2Module(pl.LightningModule):
         with open(output_file + ".txt", "w", encoding="utf-8") as f:
             f.write(text_output)
         
-        features_image, features_text = self.get_feat_output(image, text_output)
+        #features_image, features_text = self.get_feat_output(image, text_output)
 
-        np.save(output_file + ".npy", features_text.text_embeds_proj.squeeze(0).cpu().numpy())
+        #np.save(output_file + ".npy", features_text.text_embeds_proj.squeeze(0).cpu().numpy())
         

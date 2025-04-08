@@ -16,6 +16,11 @@ class SemanticKITTIBlipDataset(Dataset):
     ):
         self.splits = {
             "predict": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+            "predict01": ["01", "02"],
+            "predict02": ["03", "04", "05"],
+            "predict03": ["06", "07", "08"],
+            "predict04": ["09", "10"],
+            "00": ["00"],
         }
         self.split = split
         self.sequences = self.splits[split]
