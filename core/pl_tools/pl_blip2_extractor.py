@@ -6,7 +6,7 @@ from pytorch_lightning.strategies import DDPStrategy
 from configs.config import CONF
 
 from core.datasets import SemanticKITTIBlipTextDataModule
-from core.model.blip2 import Blip2Extractor
+from core.model.blip2.blip2_extractor import Blip2Extractor
 
 def main():
     num_gpu = torch.cuda.device_count()

@@ -8,7 +8,7 @@ from pytorch_lightning.strategies import DDPStrategy
 from configs.config import CONF
 
 from core.datasets import SemanticKITTIBlipDataset
-from core.model.llava import LLaVAModule
+from core.model.llava.LLaVA_net import LLaVAModule
 
 def main():
     ds = SemanticKITTIBlipDataset(

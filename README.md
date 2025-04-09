@@ -1,6 +1,6 @@
 # Visual-Language Guided Semantic Scene Completion
 
-This repository is an extension of [3DSSC](https://github.com/LuckyMax0722/3DPNA). For detailed information, please refer to the main repository. Currently, this repository supports both **LAVIS**: A Library for Language-Vision Intelligence and **LLaVA**: Large Language and Vision Assistant.
+This repository is an extension of [3DSSC](https://github.com/LuckyMax0722/3DPNA). For detailed information, please refer to the main repository. Currently, this repository supports both **LAVIS: A Library for Language-Vision Intelligence** and **LLaVA: Large Language and Vision Assistant**.
 
 ## 0. Demo
 ![Demo of LAVIS and LLaVA](demo/demo_1.png)
@@ -68,7 +68,7 @@ The following models are supported for this task:
 
 * Q-Former (based on LAVIS)
 * CLIP
-* EVA-CLIP
+* Long-CLIP
 
 By running the following code, you can easily obtain descriptions for all images in the dataset.
 
@@ -76,4 +76,10 @@ Tips: you can choose to use Q-Former or CLIP by setting the **feat_extractor_mod
 
 ```bash
 python /path/to/VLGSSC/core/pl_tools/pl_blip2_extractor.py
+```
+
+or
+
+```bash
+python /path/to/VLGSSC/core/pl_tools/pl_longclip_extractor.py
 ```

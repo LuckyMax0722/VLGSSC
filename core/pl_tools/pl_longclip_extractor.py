@@ -5,18 +5,18 @@ from pytorch_lightning.strategies import DDPStrategy
 
 from configs.config import CONF
 
-from core.datasets import SemanticKITTIBlipDataModule
-from core.model.blip2.blip2_net import Blip2Module
+from core.datasets import SemanticKITTIBlipTextDataModule
+from core.model.longclip.long_clip_extractor import LongCLIPExtractor
 
 def main():
     num_gpu = torch.cuda.device_count()
 
-    dm = SemanticKITTIBlipDataModule(
+    dm = SemanticKITTIBlipTextDataModule(
         data_root=CONF.PATH.DATA_ROOT,
         )
 
-    model = Blip2Module()
-    
+    model = LongCLIPExtractor()
+
     trainer = pl.Trainer(
         logger=False,
         devices=[i for i in range(num_gpu)],
@@ -32,4 +32,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-    # python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/pl_tools/pl_blip_predict.py
+    # python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/pl_tools/pl_longclip_extractor.py
