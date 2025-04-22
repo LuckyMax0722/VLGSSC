@@ -13,6 +13,7 @@ def main():
 
     dm = SemanticKITTIBlipTextDataModule(
         data_root=CONF.PATH.DATA_ROOT,
+        foundation_model='LLaVA',
         )
 
     model = LongCLIPExtractor()

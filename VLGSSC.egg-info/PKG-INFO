@@ -1,6 +1,9 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: VLGSSC
 Version: 0.1
 Summary: A Project
 Author: Jiachen Lu
 Author-email: jiachen_lu1999@163.com
+Dynamic: author
+Dynamic: author-email
+Dynamic: summary

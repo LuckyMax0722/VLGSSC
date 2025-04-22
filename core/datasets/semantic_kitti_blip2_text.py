@@ -13,16 +13,20 @@ class SemanticKITTIBlipTextDataset(Dataset):
         self,
         data_root,
         split,
+        foundation_model,
+
     ):
         self.splits = {
             "predict": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
         }
         self.split = split
         self.sequences = self.splits[split]
+        self.foundation_model = foundation_model
 
         self.data_root = data_root
 
         self.data_infos = self.load_annotations()
+
 
 
     def __len__(self):
@@ -88,7 +92,7 @@ class SemanticKITTIBlipTextDataset(Dataset):
 
             id_base_path = os.path.join(self.data_root, "sequences", sequence, 'voxels', '*.bin')
 
-            text_base_path = os.path.join(self.data_root, "text", 'Blip2', sequence)
+            text_base_path = os.path.join(self.data_root, "text", self.foundation_model, sequence)
 
             for id_path in glob.glob(id_base_path):
                 img_id = id_path.split("/")[-1].split(".")[0]
@@ -114,6 +118,7 @@ class SemanticKITTIBlipTextDataModule(pl.LightningDataModule):
     def __init__(
         self,
         data_root,
+        foundation_model='Blip2',
         batch_size=1,
         num_workers=4,
     ):
@@ -122,9 +127,10 @@ class SemanticKITTIBlipTextDataModule(pl.LightningDataModule):
         self.data_root = data_root
         self.batch_size = batch_size
         self.num_workers = num_workers
+        self.foundation_model = foundation_model
     
     def setup(self, stage=None):
-        self.predict_dataset = SemanticKITTIBlipTextDataset(self.data_root, 'predict')
+        self.predict_dataset = SemanticKITTIBlipTextDataset(self.data_root, 'predict', self.foundation_model)
     
     def predict_dataloader(self):
         return DataLoader(
@@ -140,6 +146,7 @@ if __name__ == '__main__':
     s = SemanticKITTIBlipTextDataset(
         data_root='/u/home/caoh/datasets/SemanticKITTI/dataset',
         split='predict',
+        foundation_model='LLaVA',
     )
 
     print(s[0]['img'])

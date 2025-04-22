@@ -1,0 +1,10 @@
+transformers
+xformers
+apex
+timm
+tqdm
+huggingface_hub
+numpy
+easydict
+einops
+pytorch-lightning

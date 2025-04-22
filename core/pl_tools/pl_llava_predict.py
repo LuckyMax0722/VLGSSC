@@ -13,7 +13,7 @@ from core.model.llava.LLaVA_net import LLaVAModule
 def main():
     ds = SemanticKITTIBlipDataset(
         data_root=CONF.PATH.DATA_ROOT,
-        split='predict01',
+        split='predict04',
     )
 
     model = LLaVAModule(

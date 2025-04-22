@@ -6,17 +6,19 @@ from pytorch_lightning.strategies import DDPStrategy
 from configs.config import CONF
 
 from core.datasets import SemanticKITTIBlipTextDataModule
-from core.model.blip2.blip2_extractor import Blip2Extractor
+from core.model.jinaclip.jina_clip_extractor import JinaCLIPExtractor
 
 def main():
     num_gpu = torch.cuda.device_count()
 
     dm = SemanticKITTIBlipTextDataModule(
         data_root=CONF.PATH.DATA_ROOT,
-        foundation_model='Blip2',
+        foundation_model='LLaVA',
         )
 
-    model = Blip2Extractor(feat_extractor_model='BLIP2')  # BLIP2, CLIP
+    model = JinaCLIPExtractor(
+        truncate_dim=1024
+    )
 
     trainer = pl.Trainer(
         logger=False,
@@ -33,4 +35,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-    # python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/pl_tools/pl_blip2_extractor.py
+    # python /u/home/caoh/projects/MA_Jiachen/VLGSSC/core/pl_tools/pl_jinaclip_extractor.py
